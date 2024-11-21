@@ -1,0 +1,81 @@
+
+.icons-wrapper {
+
+    margin: 50px 0;
+   
+}
+.icons-wrapper a{
+    color: var(--black) !important;
+}
+
+
+.icons-wrapper .icons-a{
+
+    cursor: pointer;
+    text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    line-height: 1.3;
+    position: relative;
+}
+.icons-img-wrapper{
+    display: inline-block;
+    overflow: hidden;
+    border: .5px solid #ccc;
+    border-radius: 14px;
+    height: 74px;
+    width: 74px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.icons-img-wrapper:hover {
+    -webkit-box-shadow: 0 0 10px #e3e3e3;
+    -moz-box-shadow: 0 0 10px #e3e3e3;
+    box-shadow: 0 0 10px #e3e3e3;
+}
+
+.icons-img-wrapper img{
+    width: 60%;
+}
+.icon-name{
+    font-size: 14px;
+}
+
+/* .grid-wrapper{
+    display: inline-grid;
+    padding: 0px 45px;
+    grid-template-columns: repeat(10, 75px);
+    width: 100%;
+    grid-gap: 30px 56px;
+} */
+
+.custom-icon-margin .custom-col{
+    margin: 20px ;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .custom-icon-margin .custom-col{
+        margin: 10px 0;
+
+    }
+    
+  }
+
+  @media only screen and (max-width: 576px) {
+    .icon-name{
+        font-size: 11px;
+    }
+    
+  }
+
+  .backround-image-anim{
+    background-image: url(https://akam.cdn.jdmagicbox.com/images/icontent/newwap/web2022/hotkey_wedding_bg.gif);
+    background-size: contain;
+}

@@ -1,0 +1,75 @@
+/* General form section styling */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+/* Styling for each form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--light-black, #333); /* Fallback color: #333 */
+  margin-bottom: 8px;
+}
+
+/* Input styling */
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--light-gray, #ddd); /* Fallback color: #ddd */
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Input hover and focus effects */
+.form-group input:hover,
+.form-group select:hover {
+  border-color: var(--primary, #007bff); /* Fallback color: #007bff */
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary, #007bff); /* Fallback color: #007bff */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Subtle blue focus effect */
+}
+
+/* Error styling for inputs */
+.form-group.error input,
+.form-group.error select {
+  border-color: red;
+}
+
+.form-group.error .error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .form-section {
+    gap: 15px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

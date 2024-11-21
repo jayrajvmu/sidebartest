@@ -1,0 +1,32 @@
+.dropdown-menu {
+    left: 0;
+    display: block; /* Keep it visible when hovered */
+  }
+  
+  .dropdown-menu.shadow {
+    display: none; /* Hide by default */
+  }
+  
+  .dropdown-mega:hover .dropdown-menu {
+    display: block; /* Show on hover */
+  }
+  
+.mobileshow{
+    display: none;
+}
+.mobileoff{
+    display: block;
+}
+/* Custom styles for mobile dropdown */
+@media (max-width: 767px) {
+
+
+
+    .mobileshow{
+        display: block;
+    }
+    .mobileoff{
+        display: none;
+    }
+   
+}

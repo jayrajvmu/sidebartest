@@ -1,0 +1,129 @@
+/*=====================================
+idap-pro css
+======================================*/
+@media (max-width: 1199px){
+  
+    /* header top css */
+    .header-main-area{
+        padding: 15px 0px;
+    }
+    .header-main-area .header-main .header-element.logo {
+        width: 25%;
+    }
+    .header-main-area .header-main .header-element.right-block-box {
+        width: 50%;
+    }
+    /* right block css */
+    .right-block-box ul.shop-element li.side-wrap {
+        margin-left: 30px;
+    }
+    /* toggler css */
+    .header-main .header-element.right-block-box ul.shop-element li.nav-toggler{
+        display: block;
+    }
+    /* wishlist css */
+    .wishlist-wrap a.header-wishlist span.wishlist-icon{
+        font-size: 30px;
+    }
+    .wishlist-wrap a.header-wishlist span.wishlist-counter{
+        right: 0px;
+    }
+    /* cart css */
+    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.cart-icon{
+        font-size: 30px;
+    }
+    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.bigcounter{
+        right: 0px;
+    }
+    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.cart-price{
+        display: none;
+    }
+    /* lg-menu */
+    .menu-area{
+        display: none;
+    }
+    /* header-bottom css */
+    .header-bottom-area{
+        display: block;
+    }
+    .header-bottom-area .main-menu-area{
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100%;
+        overflow-y: auto;
+        background-color: var(--white);
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        border-top: none;
+    }
+    .header-bottom-area .main-menu-area.active{
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+        background: var(--white);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+    .header-bottom-area .main-menu-area,
+    .header-bottom-area .main-menu-area.active{
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        -o-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+    }
+    .header-bottom-area .main-menu-area .main-navigation .navbar-collapse{
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 45px;
+    }
+    .header-bottom-area .main-menu-area .main-navigation .navbar-collapse .megamenu-content{
+        width: 100%;
+    }
+    /* box-header css */
+    .main-menu-area .main-navigation .box-header{
+        display: block;
+    }
+
+
+    
+}
+/*=====================================
+ipad css
+======================================*/
+@media (max-width: 991px){
+
+    /* header css */
+    .header-main-area{
+        padding: 10px 0px;
+    }
+    .header-main .header-element.right-block-box ul.shop-element li.nav-toggler{
+        display: block;
+    }
+    .right-block-box ul.shop-element li.side-wrap{
+        margin-left: 15px;
+    }
+  
+}
+/*=====================================
+iphone css
+======================================*/
+@media (max-width: 767px){
+    /* container css */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* header top css */
+    .header-main-area .header-main .header-element.logo{
+        width: 50%;
+    }
+  
+    .header-main-area .header-main .header-element.right-block-box{
+        width: 50%;
+    }
+
+}
