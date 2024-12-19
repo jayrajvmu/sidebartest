@@ -114,10 +114,10 @@ const GeneratePDF = ({
                   data.date.getMonth() + 1
                 ).padStart(2, "0")}/${String(data.date.getFullYear())}`,
               ],
-              ["Challan Number:", data.challan_number],
-              ["Client Name:", data.client_name],
-              ["Site Supervisor:", data.site_supervisor],
-              ["Project Manager:", data.project_manager],
+              ["Challan Number", data.challan_number],
+              ["Client Name", data.client_name],
+              ["Site Supervisor", data.site_supervisor],
+              ["Project Manager", data.project_manager],
             ];
 
             doc.autoTable({
