@@ -106,6 +106,7 @@ export const generatePDF = ({ headerImage, footerImage, data, headingTextContent
           }
 
 
+          
           const pageNumberText = "Page "+currentPage;
           const pageNumberTextYPos = pageHeight - 6 ; // Adjusted vertical position
           // Calculate centered position
