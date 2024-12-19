@@ -32,6 +32,24 @@ function App() {
       { materials: 'DRAWER LOCK', quantity: 21, unit: "Sets", remarks:"Something" },
       { materials: 'SL – 16 MECHANISM', quantity: 21, unit: "Sets", remarks:"Something" },
 
+
+
+      { materials: '0 CRANK HINGES ( NORMAL CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '0 CRANK HINGES ( SOFT CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '450MM CHANNEL ( SOFT CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '0 CRANK HINGES ( NORMAL CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: 'SL – 16 MECHANISM', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: 'DRAWER LOCK', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: 'SL – 16 MECHANISM', quantity: 21, unit: "Sets", remarks:"Something" },
+
+
+      { materials: '0 CRANK HINGES ( NORMAL CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '0 CRANK HINGES ( SOFT CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '450MM CHANNEL ( SOFT CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: '0 CRANK HINGES ( NORMAL CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: 'SL – 16 MECHANISM', quantity: 21, unit: "Sets", remarks:"Something" },
+      { materials: 'DRAWER LOCK', quantity: 21, unit: "Sets", remarks:"Something" },
+
     ]
   }
 
@@ -46,7 +64,7 @@ function App() {
   return (
     <div>
       <Router>
-      <GeneratePDF headerImage={headerImage} footerImage={footerImage} data={deliveryData} />
+      <GeneratePDF headerImage={headerImage} footerImage={footerImage} data={deliveryData} headingTextContent={"DELIVERY CHALLAN"} />
         <Routes>
           <Route path="/" element={<>
             
