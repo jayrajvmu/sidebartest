@@ -1,14 +1,8 @@
-import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const GeneratePDF = ({
-  data,
-  headerImage,
-  footerImage,
-  headingTextContent,
-}) => {
-  const generatePDF = () => {
+export const generatePDF = ({ headerImage, footerImage, data, headingTextContent }) => {
+
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.width;
     const pageHeight = doc.internal.pageSize.height;
@@ -192,11 +186,5 @@ const GeneratePDF = ({
     };
   };
 
-  return (
-    <div>
-      <button onClick={generatePDF}>Generate PDF</button>
-    </div>
-  );
-};
 
-export default GeneratePDF;
+

@@ -6,7 +6,8 @@ import Incons from './Components/Icons/Incons';
 import Popular from './Components/Popular/Popular';
 import Form from './Components/Form/Form';
 import Wrap from './Components/Wrap/Wrap';
-import GeneratePDF from './Components/PDF/GeneratePDF';
+// import GeneratePDF from './Components/PDF/GeneratePDF';
+import DataTable from './Components/DataTable/DataTable';
 
 import {footeri, headeri} from "./assets/image"
 
@@ -58,12 +59,21 @@ function App() {
   const headerImage = headeri; // Replace with your actual image URL or base64
   const footerImage = footeri; // Replace with your actual image URL or base64
 
+  const headers = ["SI.No", "Materials", "Quantity", "Unit", "Remarks"];
+  const data = [
+    { si_no: 1, materials: "Material A", quantity: 10, unit: "Kg", remarks: "Good" },
+    { si_no: 2, materials: "Material B", quantity: 20, unit: "L", remarks: "Average" },
+    { si_no: 3, materials: "Material C", quantity: 15, unit: "Sets", remarks: "Excellent" },
+  ];
 
   
   return (
     <div>
       <Router>
-      <GeneratePDF headerImage={headerImage} footerImage={footerImage} data={deliveryData} headingTextContent={"DELIVERY CHALLAN"} />
+      {/* <GeneratePDF headerImage={headerImage} footerImage={footerImage} data={deliveryData} headingTextContent={"DELIVERY CHALLAN"} /> */}
+
+      <DataTable headers={headers} data={data} />
+
         <Routes>
           <Route path="/" element={<>
             
