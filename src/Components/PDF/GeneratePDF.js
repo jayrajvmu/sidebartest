@@ -2,7 +2,12 @@ import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const GeneratePDF = ({ data, headerImage, footerImage, headingTextContent }) => {
+const GeneratePDF = ({
+  data,
+  headerImage,
+  footerImage,
+  headingTextContent,
+}) => {
   const generatePDF = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.width;
@@ -13,19 +18,23 @@ const GeneratePDF = ({ data, headerImage, footerImage, headingTextContent }) => 
     headerImg.src = headerImage;
     footerImg.src = footerImage;
 
+    let dynamicHeaders = Object.keys(data.items[0]); // Extract keys for headers dynamically
+    dynamicHeaders.unshift("SI.No");
+
+    dynamicHeaders = dynamicHeaders.map((header) => header.toUpperCase());
+
+    const dynamicBody = data.items.map((item, index) => [
+      index + 1,
+      ...Object.values(item), // Extract values for rows dynamically
+    ]);
+
     // Function to handle PDF rendering
     const renderPDF = (headerImgHeight, footerImgHeight) => {
       // Ensure the header and footer appear on every page
       doc.autoTable({
         startY: headerImgHeight + 95,
-        head: [["SI.NO", "MATERIALS", "QUANTITY", "UNIT", "REMARKS"]],
-        body: data.items.map((item, index) => [
-          index + 1,
-          item.materials,
-          item.quantity,
-          item.unit,
-          item.remarks,
-        ]),
+        head: [dynamicHeaders], // Pass dynamic headers here
+        body: dynamicBody, // Pass dynamic body here
         theme: "grid",
         styles: { cellPadding: 5 },
         headStyles: {
@@ -95,10 +104,16 @@ const GeneratePDF = ({ data, headerImage, footerImage, headingTextContent }) => 
           }
 
           // Add customer table only on the first page
+
           if (currentPage === 1) {
             const customerNameTableYPos = headerImgHeight + 16;
             const customerInfoTableData = [
-              ["Date", data.date],
+              [
+                "Date",
+                `${String(data.date.getDate()).padStart(2, "0")}/${String(
+                  data.date.getMonth() + 1
+                ).padStart(2, "0")}/${String(data.date.getFullYear())}`,
+              ],
               ["Challan Number:", data.challan_number],
               ["Client Name:", data.client_name],
               ["Site Supervisor:", data.site_supervisor],
@@ -113,10 +128,10 @@ const GeneratePDF = ({ data, headerImage, footerImage, headingTextContent }) => 
               columnStyles: {
                 0: {
                   halign: "left",
-                  cellWidth: "auto",
                   fillColor: [34, 157, 167],
                   textColor: [255, 255, 255],
                   fontStyle: "bold",
+                  cellWidth: pageWidth * 0.3,
                 },
                 1: { halign: "left", cellWidth: "auto" },
               },

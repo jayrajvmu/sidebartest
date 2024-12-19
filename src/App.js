@@ -7,8 +7,6 @@ import Popular from './Components/Popular/Popular';
 import Form from './Components/Form/Form';
 import Wrap from './Components/Wrap/Wrap';
 import GeneratePDF from './Components/PDF/GeneratePDF';
-import PDFGenerator from './Components/PDF/PDFGenerator';
-import { PDFDownloadLink } from '@react-pdf/renderer';  // Import PDFDownloadLink
 
 import {footeri, headeri} from "./assets/image"
 
@@ -17,11 +15,12 @@ function App() {
 
 
  const  deliveryData = {
-    client_name:"Jayaraj M",
     date: new Date(),
     site_supervisor:"Test",
     project_manager:"Jega",
     challan_number:"DC1576",
+    client_name:"Jayaraj M",
+
 
     items:[
       { materials: '0 CRANK HINGES ( NORMAL CLOSE )', quantity: 21, unit: "Sets", remarks:"Something" },

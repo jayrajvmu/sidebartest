@@ -2,7 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const GeneratePDF = ({ data, headerImage, footerImage }) => {
+const GeneratePDF = ({ data, headerImage, footerImage, headingTextContent }) => {
   const generatePDF = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.width;
@@ -17,7 +17,7 @@ const GeneratePDF = ({ data, headerImage, footerImage }) => {
     const renderPDF = (headerImgHeight, footerImgHeight) => {
       // Ensure the header and footer appear on every page
       doc.autoTable({
-        startY: headerImgHeight + 92,
+        startY: headerImgHeight + 95,
         head: [["SI.NO", "MATERIALS", "QUANTITY", "UNIT", "REMARKS"]],
         body: data.items.map((item, index) => [
           index + 1,
@@ -51,7 +51,7 @@ const GeneratePDF = ({ data, headerImage, footerImage }) => {
           }
 
           if (currentPage === 1) {
-            const headingText = "DELIVERY CHALLAN";
+            const headingText = headingTextContent;
             const headingTextYPos = headerImgHeight + 10; // Adjusted vertical position
 
             doc.setFont("helvetica", "bold");
@@ -65,14 +65,14 @@ const GeneratePDF = ({ data, headerImage, footerImage }) => {
           }
 
           const procurementSignatureText = "PROCUREMENT MANAGER SIGNATURE";
-          const procurementSignatureYPos = pageHeight - footerImgHeight - 4; // Position the signature text before the footer image
+          const procurementSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
           doc.setFont("helvetica", "normal");
           doc.setFontSize(10);
           doc.text(procurementSignatureText, 14, procurementSignatureYPos);
 
           const executionSignatureText = "EXECUTION HEAD SIGNATURE";
           const executiontextWidth = doc.getTextWidth(executionSignatureText); // Get the width of the text
-          const executionSignatureYPos = pageHeight - footerImgHeight - 4; // Position the signature text before the footer image
+          const executionSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
           doc.setFont("helvetica", "normal");
           doc.setFontSize(10);
           doc.text(
