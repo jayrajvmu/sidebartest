@@ -7,6 +7,7 @@ import { parsePath } from "react-router-dom";
 const Test = ({ formData, setFormData, errors, setErrors }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [activeStartDate, setActiveStartDate] = useState(new Date()); // Controls the displayed month
+  let maxDayLimit = 60;
 
   const bookingData = [
     {
@@ -40,7 +41,6 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
     name: "Site Masking",
     buffer: "1hr",
     duration: "3hr",
-    maxDayLimit:60,
     availability: {
       monday: ["9am", "10pm"],
       tuesday: ["9am", "10am"],
@@ -66,11 +66,11 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
     bookingData,
     eventData,
     teamData,
-    daysAhead = eventData.maxDayLimit
+    daysAhead = maxDayLimit
   ) => {
     const excludedDates = [];
     const today = new Date();
-  
+    
 
     //11111111111111111.buffer check
     const originalDateold = new Date(today);
@@ -299,7 +299,7 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
   };
 
   // Calculate 60 calendar days from today
-  const getMaxDate = (daysLimit = eventData.maxDayLimit) => {
+  const getMaxDate = (daysLimit = maxDayLimit) => {
     if (daysLimit === null) {
       return null; // No date limit, return null
     }

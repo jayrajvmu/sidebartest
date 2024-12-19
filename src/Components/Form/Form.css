@@ -156,6 +156,11 @@ body::-webkit-scrollbar {
 /* Responsive Design */
 @media (max-width: 768px) {
 
+  .form-container{
+    padding: 10px;
+
+  }
+
   body{
     padding: 0px
   }

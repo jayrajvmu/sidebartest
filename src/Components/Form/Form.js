@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import Test from "../Test/Test";
+// import Test from "../Test/Test";
 import Eventtype from "../Eventtype/Eventtype";
 import "./Form.css"; // Assuming the CSS file is linked here
 import Nav from "../Nav/Nav";
+import Location from "../Location/Location";
+import Calendar from "../Calendar/Main";
 
 function Form() {
   const [page, setPage] = useState(0);
-  const FormTitles = ["Show Room", "Slot", "Other"];
+  const FormTitles = ["Show Room", "Slot Details", "Location Details"];
   const [formData, setFormData] = useState({
     eventtype:"",
     showroom: "",
     selectedDate: "",
     slot: "",
+    designername:"",
+    clientname:"",
+    clientid:"",
+    addressofproperty:"",
+    googlelocation:"",
+    teamId:""
+
 
   });
   const [errors, setErrors] = useState({});
@@ -21,15 +30,26 @@ function Form() {
     if (page === 0) {
       if (!formData.showroom) newErrors.showroom = "showroom is required";
       if (!formData.eventtype) newErrors.eventtype = "Eventtype is required";
-
     } else if (page === 1) {
       if (!formData.selectedDate) newErrors.selectedDate = "Date is required";
       if (formData.selectedDate && !formData.slot) newErrors.slot = "Slot is required";
-
-
+    }
+    else {
+      if (!formData.designername) newErrors.designername = "Designer Name is required";
+      if (!formData.clientname) newErrors.clientname = "Client Name is required";
+      if (!formData.clientid) newErrors.clientid = "Client ID is required";
+      if (!formData.addressofproperty) newErrors.addressofproperty = "Address of the Property is required";
+      if (!formData.googlelocation) {newErrors.googlelocation = "Google Location is required"; }
+       else {
+        try {
+            new URL(formData.googlelocation);
+        } catch (e) {
+            newErrors.googlelocation = "Invalid URL for Google Location";
+        }
+    }
 
     }
-    setErrors(newErrors);
+    setErrors(newErrors);    
     return Object.keys(newErrors).length === 0;
   };
 
@@ -37,9 +57,9 @@ function Form() {
     if (page === 0) {
       return <Eventtype formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />;
     } else if (page === 1) {
-      return <Test formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />;
+      return <Calendar formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />;
     } else {
-      return <Eventtype formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />;
+      return <Location formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />;
     }
   };
 
@@ -85,7 +105,6 @@ function Form() {
               onClick={() => {
                 if (page === FormTitles.length - 1) {
                   if (validateStep()) {
-                    alert("FORM SUBMITTED");
                     console.log(formData);
                   }
                 } else {

@@ -7,70 +7,46 @@ import { parsePath } from "react-router-dom";
 const Test = ({ formData, setFormData, errors, setErrors }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [activeStartDate, setActiveStartDate] = useState(new Date()); // Controls the displayed month
+  let maxDayLimit = 60;
 
   const bookingData = [
     {
+      date: "2024-11-23",
+      slot: ["9am", '10am'],
+    },
+    {
       date: "2024-11-25",
-      slots: {
-        team1: ["7am", "8am", "10pm"],
-        team2: ["7am", "8am","10pm"],
-
-      },
-    },
-
-    {
-      date: "2024-11-26",
-      slots: {
-        // team1: ["9am", "10am"],
-        // team2: ["9am", "10am"],
-      },
+      slot: ["10am", "2pm"],
     },
     {
-      date: "2024-11-29",
-      slots: {
-        team1: ["11am", "2pm"],
-        team2: ["11am"],
-      },
+      date: "2024-12-01",
+      slot: ["10am", "2pm"],
     },
-
-  
   ];
 
   const eventData = {
     name: "Site Masking",
-    buffer: "1hr",
+    buffer: "74hr",
     duration: "3hr",
-    maxDayLimit:60,
     availability: {
-      monday: ["9am", "10pm"],
-      tuesday: ["9am", "10am"],
+      monday: [],
+      tuesday: ["10am", "2pm"],
       wednesday: ["10am", "2pm"],
       thursday: ["10am", "2pm"],
       friday: ["10am", "8pm"],
-      saturday: ["7am", "8am"],
+      saturday: ["1pm", "2pm"],
       sunday: ["11am", "2pm"],
     },
   };
-
-  const teamData = [
-    { name: "team1", id: 1 },
-    { name: "team2", id: 2 },
-    { name: "team3", id: 3 },
-    { name: "team4", id: 4 },
-
-
-  ];
 
   // Function to generate excluded dates dynamically for future dates
   const generateExcludedDates = (
     bookingData,
     eventData,
-    teamData,
-    daysAhead = eventData.maxDayLimit
+    daysAhead = maxDayLimit
   ) => {
     const excludedDates = [];
     const today = new Date();
-  
 
     //11111111111111111.buffer check
     const originalDateold = new Date(today);
@@ -96,8 +72,6 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
       datesInRange.push(currentDate.toLocaleDateString("en-CA"));
       currentDate.setDate(currentDate.getDate() + 1); // Increment by one day
     }
-
-        
     if (datesInRange.length > 1) {
       // If the new array has only one element, push that element
       excludedDates.push(...datesInRange.slice(0, -1));
@@ -109,8 +83,6 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
       .toLowerCase();
     // 2. Get the available slots for the selected weekday from eventData
     const availableSlots = eventData.availability[weekday] || []; // Empty array if no slots available for that weekday
-
-
     let checkSlot = [];
     availableSlots.forEach((slot) => {
       const [hour, modifier] = slot.split(/(am|pm)/i);
@@ -135,101 +107,46 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
       }
     });
 
+    console.log(bookingData);
     
-
 
     if (checkSlot.length === availableSlots.length) {
       excludedDates.push(updatedDateold.toLocaleDateString("en-CA"));
     } else if (checkSlot.length < availableSlots.length) {
-        
       let pushtoBook = {
         date: updatedDateold.toLocaleDateString("en-CA"),
         slot: checkSlot,
-      };      
-      
-      
+      };
+      // bookingData.push(pushtoBook);
       const existingEntry = bookingData.find(
         (entry) => entry.date === pushtoBook.date
       );
-      
-      
 
-      if (existingEntry) { 
-       // Loop through all teams and add the new slot
-        // Object.keys(existingEntry.slots).forEach((team) => {
-        //   console.log(team);
-        //   const newSlots = Array.isArray(pushtoBook.slot) ? pushtoBook.slot : [pushtoBook.slot];          
-        //   // Add each slot from newSlots to the team's slot array if it doesn't already exist
-        //   newSlots.forEach((slot) => {
-        //     if (!existingEntry.slots[team].includes(slot)) {
-        //       existingEntry.slots[team].push(slot);
-        //     }
-        //   });
-        // });
-
-        teamData.forEach(({name})=>{
-          const newSlots = Array.isArray(pushtoBook.slot) ? pushtoBook.slot : [pushtoBook.slot];  
-          newSlots.forEach((slot) => {
-            if(existingEntry.slots[name]){
-            if (!existingEntry.slots[name].includes(slot)) {
-              existingEntry.slots[name].push(slot);
-            }
-            }else{
-              existingEntry.slots[name]=[slot]
-            }  
-          });
-        })
-      }else{
-        let newDatetoPush={date:'', slots:{}}
-        teamData.forEach(({name})=>{
-          const newSlots = Array.isArray(pushtoBook.slot) ? pushtoBook.slot : [pushtoBook.slot];  
-          newDatetoPush.date=pushtoBook.date;
-          newDatetoPush.slots[name] = [];
-          newSlots.forEach((slot) => {
-            newDatetoPush.slots[name].push(slot)
-          });
-        })
-        bookingData.push(newDatetoPush);
+      if (existingEntry) {
+        // Merge and deduplicate slots
+        existingEntry.slot = Array.from(
+          new Set([...existingEntry.slot, ...pushtoBook.slot])
+        );
+      } else {
+        // Add new entry
+        bookingData.push(pushtoBook);
       }
     }
 
-    console.log(bookingData);
-    
-
     // 22222222222. Check bookingData for fully booked dates
-    
-
     bookingData.forEach((entry) => {
       // Convert the date to the day of the week (e.g., "friday")
       const weekday = new Date(entry.date)
         .toLocaleString("en-us", { weekday: "long" })
         .toLowerCase();
-
+      
       // Ensure the day exists in the availability object
       const availableSlots = eventData.availability[weekday];
 
-      // Continue if there are available slots for this day
-      if (availableSlots && availableSlots.length > 0) {
-        let isFullyBooked = true; // Flag to track if all teams are fully booked
+      
 
-        // Loop through each team's slots to check if they match or contain available slots
-
-        if(Object.keys(entry.slots).length === teamData.length){
-        for (const team in entry.slots) {
-          const teamSlots = entry.slots[team];
-          const isTeamFullyBooked = availableSlots.every((item) =>
-            teamSlots.includes(item)
-          );
-
-          if (!isTeamFullyBooked) {
-            isFullyBooked = false;
-            break; // No need to check further if one team doesn't match
-          }
-        }
-        if (isFullyBooked) {
-          excludedDates.push(entry.date);
-        }
-      }
+      if (availableSlots && entry.slot && availableSlots.sort().join() === entry.slot.sort().join() ) {
+        excludedDates.push(entry.date); // Add fully booked date
       }
     });
 
@@ -262,19 +179,17 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
           nextDate.setDate(nextDate.getDate() + 7); // Move to the next occurrence of that day (e.g., next Monday)
         }
       }
-    });
+    });    
     return excludedDates;
   };
 
-  const useExcludedDates = () => {
+  const useExcludedDates = (bookingData, eventData) => {
     return useMemo(() => {
-      return generateExcludedDates(bookingData, eventData, teamData);
-    }, [bookingData, eventData, teamData]); // Only recompute when these inputs change
+      return generateExcludedDates(bookingData, eventData);
+    }, [bookingData, eventData]); // Only recompute when these inputs change
   };
 
-  const excludedDates = useExcludedDates();
-
-  
+  const excludedDates = useExcludedDates(bookingData, eventData);
 
   // Check if the date is in the past
   const isPastDate = (date) => {
@@ -299,7 +214,7 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
   };
 
   // Calculate 60 calendar days from today
-  const getMaxDate = (daysLimit = eventData.maxDayLimit) => {
+  const getMaxDate = (daysLimit = maxDayLimit) => {
     if (daysLimit === null) {
       return null; // No date limit, return null
     }
@@ -371,8 +286,6 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
   // Handle date change from the calendar
   const handleDateChange = (date) => {
     formData.slot = ""; // removeing slot when user change date after selct slot
-    formData.teamId = ""; // removeing slot when user change date after selct slot
-
     const formattedDate = date.toLocaleDateString("en-CA"); // Format date as YYYY-MM-DD
     setSelectedDate(formattedDate);
     setFormData({ ...formData, selectedDate: formattedDate });
@@ -416,50 +329,18 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
   // 2. Get the available slots for the selected weekday from eventData
   const availableSlots = eventData.availability[weekday] || []; // Empty array if no slots available for that weekday
   // 3. Get the booked slots for the selected date from bookingData
-  const bookedSlot = bookingData.find(
-    (entry) => entry.date === formData.selectedDate
+  const bookedSlots = bookingData
+    .filter((entry) => entry.date === formData.selectedDate) // Filter by selected date
+    .flatMap((entry) => entry.slot); // Extract booked slots
+  // 4. Filter out the booked slots from available slots
+  const availableSlotsToShow = availableSlots.filter(
+    (slot) => !bookedSlots.includes(slot)
   );
-  const slotsForDate = bookedSlot ? bookedSlot.slots : {}; // Extract slots or default to an empty object
 
-  let availableSlotsByTeam = [];
-
-  if (Object.keys(slotsForDate).length !== 0) {
-    // Filter available slots for each team and add team ID
-    availableSlotsByTeam = teamData.reduce((result, team) => {  
-          
-      const bookedSlotsForTeam = slotsForDate[team.name] || []; // Get booked slots for the team or an empty array
-
-      availableSlots.filter(slot => {
-        !bookedSlotsForTeam.includes(slot) && result.push({ id: team.id, slot });
-    });
-      return result;
-    }, []);
-  } else {
-    // If no bookings, assign all available slots to each team and add the team id
-    availableSlotsByTeam = teamData.reduce((result, team) => {
-      availableSlots.forEach(slot => {
-          result.push({ id: team.id, slot });
-      });
-      return result;
-  }, []);
-  }  
-
-
-
-  const uniqueSlots = availableSlotsByTeam.reduce((result, {id, slot})=>{
-    if (!result.some(item => item.slot === slot)) {
-      result.push({ id, slot }); // Add only unique slots
-  }
-    return result
-  }, [])
-  
-
-
-  const handleSlotSelection = (slot, teamId) => {
+  const handleSlotSelection = (slot) => {
     setFormData({
       ...formData,
-      slot: slot,
-      teamId: teamId, // Update the slot in formData
+      slot: slot, // Update the slot in formData
     });
 
     // Optional: Clear error for slot selection if it exists
@@ -470,7 +351,6 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
       });
     }
   };
-
 
   return (
     <div className="calendar-container">
@@ -496,26 +376,17 @@ const Test = ({ formData, setFormData, errors, setErrors }) => {
             <p>{formatDatetoday(formData.selectedDate)}</p>
 
             <div className="time-slot-container">
-             {uniqueSlots && uniqueSlots.map(({id, slot}, index)=>{
-
-              return(
+              {availableSlotsToShow.map((slot, index) => (
                 <button
-                key={index+id}
-                id={id}
+                  key={index} // Unique key for each button
                   className={`time-slot ${
-                    formData.teamId === id && formData.slot === slot
-                      ? "selected"
-                      : ""
+                    formData.slot === slot ? "selected" : ""
                   }`}
-                  onClick={() => handleSlotSelection(slot, id)}
+                  onClick={() => handleSlotSelection(slot)}
                 >
                   {slot}
                 </button>
-              )
-        
-            
-              })}
-
+              ))}
             </div>
 
             {errors.slot && <p className="error-message">{errors.slot}</p>}

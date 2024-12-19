@@ -24,7 +24,7 @@ function Eventtype({ formData, setFormData, errors, setErrors }) {
     value={formData.eventtype}
     onChange={(event) => handleInputChange("eventtype", event.target.value)}
   >
-    <option value="">Select your nationality</option>
+    <option value="">Select your Event Type</option>
     <option value="usa">United States</option>
     <option value="india">India</option>
     <option value="uk">United Kingdom</option>
@@ -34,8 +34,6 @@ function Eventtype({ formData, setFormData, errors, setErrors }) {
     <p className="error-message">{errors.eventtype}</p>
   )}
    </div>
-
-
    
    <div className={`form-group ${errors.showroom ? "error" : ""}`}>
   <label>Showroom</label>
@@ -43,7 +41,7 @@ function Eventtype({ formData, setFormData, errors, setErrors }) {
     value={formData.showroom}
     onChange={(event) => handleInputChange("showroom", event.target.value)}
   >
-    <option value="">Select your nationality</option>
+    <option value="">Select your Showroom Name</option>
     <option value="usa">United States</option>
     <option value="india">India</option>
     <option value="uk">United Kingdom</option>

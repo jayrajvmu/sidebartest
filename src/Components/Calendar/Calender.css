@@ -1,0 +1,238 @@
+.calendar-container {
+
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    box-shadow:1px 1px 21px rgb(0 0 0 / 50%);
+
+}
+
+
+.calendar-container abbr{
+
+    text-decoration: none !important;
+}
+
+
+.react-calendar__weekday {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.react-calendar {
+    width: 100%;
+    border: none;
+
+}
+
+.react-calendar__tile--now {
+    background:var(--white) !important;
+
+}
+
+
+
+.react-calendar__tile:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: var(--white) !important;
+}
+
+.react-calendar__tile--active {
+    background: var(--white) !important;
+
+}
+
+
+.react-calendar__tile {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 40px;
+    font-size: 15px;
+    margin: 8px;
+    /* Increase margin for more spacing between dates */
+}
+
+/* Today's available date */
+.today-date abbr {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 45px;
+    width: 45px; */
+    border-radius: 50%;
+    padding: 10px;
+
+}
+
+.today-date{
+    position: relative;
+}
+.today-date abbr::after {
+    content: '';
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+  }
+
+
+
+/* Available dates */
+.available-date abbr {
+    cursor: pointer;
+    /* background-color: #eef5ff;
+    color: #0060e6; */
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 45px;
+    width: 45px; */
+    transition: background-color 0.2s ease;
+    padding: 10px;
+}
+
+.available-date abbr:hover {
+    background-color: var(--secondary);
+    /* Darker blue on hover */
+    color: var(--white);
+}
+
+/* Past dates */
+.past-date {
+    background-color: red;
+    /* Light gray */
+    border-radius: 50%;
+    color: var(--light-gray);
+    cursor: not-allowed;
+    margin: 8px;
+}
+
+
+
+.react-calendar__tile:disabled {
+    background-color: transparent;
+}
+
+/* Navigation buttons styling */
+.react-calendar__navigation button {
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.react-calendar__navigation button:hover {
+    color: var(--primary);
+    background-color: var(--secondary) !important;
+}
+
+.react-calendar__navigation button:disabled {
+    background-color: transparent ;
+    color: var(--light-gray);
+}
+
+.react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
+    background-color:transparent;
+}
+.react-calendar__tile--active:enabled:focus abbr {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+.react-calendar__navigation__label {
+    pointer-events: none; /* Disable clicking on the navigation label */
+    color: var(--light-black) !important; /* Optional: Make it look disabled */
+  }
+
+  .selected-date abbr {
+    background-color: var(--secondary); /* Yellow background for selected date */
+  }
+
+
+.timeslot-wrapper{
+    margin:30px 0;
+    border-top: 1px solid #abb2c7;
+    padding-top: 30px;
+}
+/* Container for the time slots */
+.time-slot-container {
+    display: flex;
+    gap: 10px; /* Spacing between time slots */
+    align-items: center; /* Center horizontally */
+  }
+  
+  /* Styling for each time slot */
+  .time-slot {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid var(--primary); /* Blue border */
+    border-radius: 8px; /* Rounded corners */
+    color: var(--primary); /* Blue text */
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover effect */
+  .time-slot:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .time-slot-container button.time-slot.selected{
+    background-color: var(--secondary);
+    border: 2px solid var(--secondary); /* Blue border */
+
+    color: white;
+  }
+
+  @media screen and (max-width:550px) {
+
+    .today-date abbr::after {
+
+        bottom: 20px;
+    
+      }
+    
+
+    .calendar-container {
+        padding: 10px;
+
+    }
+
+
+    .today-date abbr, .available-date abbr {
+        /* height: 30px;
+        width: 36px; */
+        padding: 6px;
+
+    }
+
+    .react-calendar__tile{
+        font-size: 12px;
+    }
+
+    .time-slot-container {
+
+        flex-direction: column;
+        align-items: stretch;
+          }
+}

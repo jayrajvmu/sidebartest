@@ -1,0 +1,46 @@
+/* Challan.css */
+.challan-container {
+    width: 100%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .challan-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .challan-title h1 {
+    margin: 0;
+  }
+  
+  .challan-info p {
+    margin: 0;
+  }
+  
+  .challan-body {
+    margin-bottom: 20px;
+  }
+  
+  .challan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .challan-table th, .challan-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .challan-footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .footer-info p {
+    margin: 0;
+  }
+  
