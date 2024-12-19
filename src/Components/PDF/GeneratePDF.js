@@ -56,16 +56,17 @@ export const generatePDF = ({ headerImage, footerImage, data, headingTextContent
           if (currentPage === 1) {
             const headingText = headingTextContent;
             const headingTextYPos = headerImgHeight + 10; // Adjusted vertical position
-
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
-
             // Calculate centered position
             const headingTextWidth = doc.getTextWidth(headingText);
             const headingTextXPos = (pageWidth - headingTextWidth) / 2; // Center X positio
             // Draw the text
             doc.text(headingText, headingTextXPos, headingTextYPos);
           }
+
+
+       
 
           const procurementSignatureText = "PROCUREMENT MANAGER SIGNATURE";
           const procurementSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
@@ -76,13 +77,20 @@ export const generatePDF = ({ headerImage, footerImage, data, headingTextContent
           const executionSignatureText = "EXECUTION HEAD SIGNATURE";
           const executiontextWidth = doc.getTextWidth(executionSignatureText); // Get the width of the text
           const executionSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(10);
           doc.text(
             executionSignatureText,
             pageWidth - 14 - executiontextWidth,
             executionSignatureYPos
           );
+
+
+
+
+
+
+
+
+
 
           // Add footer image on each page
           if (footerImg && footerImgHeight) {
@@ -97,6 +105,14 @@ export const generatePDF = ({ headerImage, footerImage, data, headingTextContent
             );
           }
 
+
+          const pageNumberText = "Page "+currentPage;
+          const pageNumberTextYPos = pageHeight - 6 ; // Adjusted vertical position
+          // Calculate centered position
+          const pageNumberTextWidth = doc.getTextWidth(pageNumberText);
+          doc.setTextColor(0, 0, 0);
+          // Draw the text
+          doc.text(pageNumberText,  pageWidth - 14 - pageNumberTextWidth, pageNumberTextYPos);
           // Add customer table only on the first page
 
           if (currentPage === 1) {

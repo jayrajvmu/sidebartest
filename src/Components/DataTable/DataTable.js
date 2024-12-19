@@ -136,6 +136,151 @@ const DataTable = ({ headers, data }) => {
         unit: "Sets",
         remarks: "Something",
       },
+
+
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+
+
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+    
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
+      {
+        materials: "DRAWER LOCK",
+        quantity: 21,
+        unit: "Sets",
+        remarks: "Something",
+      },
     ],
   };
 
