@@ -70,14 +70,14 @@ export const generatePDF = ({
         }
 
         const procurementSignatureText = "PROCUREMENT MANAGER SIGNATURE";
-        const procurementSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
+        const procurementSignatureYPos = pageHeight - footerImgHeight - 3; // Position the signature text before the footer image
         doc.setFont("helvetica", "normal");
         doc.setFontSize(10);
         doc.text(procurementSignatureText, 14, procurementSignatureYPos);
 
         const executionSignatureText = "EXECUTION HEAD SIGNATURE";
         const executiontextWidth = doc.getTextWidth(executionSignatureText); // Get the width of the text
-        const executionSignatureYPos = pageHeight - footerImgHeight - 5; // Position the signature text before the footer image
+        const executionSignatureYPos = pageHeight - footerImgHeight - 3; // Position the signature text before the footer image
 
         doc.text(
           executionSignatureText,
@@ -144,7 +144,7 @@ export const generatePDF = ({
           });
         }
       },
-      margin: { top: headerImgHeight + 15, bottom: footerImgHeight + 20 },
+      margin: { top: headerImgHeight + 10, bottom: footerImgHeight + 20 },
     });
 
     // Open PDF in a new tab
