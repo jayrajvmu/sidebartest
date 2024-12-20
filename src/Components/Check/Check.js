@@ -11,37 +11,42 @@ const arr = [
 ];
 
 export default function Check() {
-  const [myMovies, setMyMovies] = useState(arr);
-  const [isTrue, setIsTrue] = useState({});
-
-  const deleteFun = (index) => {
-    const newMovies = myMovies.filter((_, i) => i !== index);
-    setMyMovies(newMovies);
-
-    console.log(myMovies);
-
-    console.log(isTrue);
-  };
+  const [myMovies, setMyMovies] = useState(
+    arr.map((movies) => ({ name: movies, selected: false }))
+  );
 
   console.log(myMovies);
 
-  console.log(isTrue);
+  const deleteFun = (index) => {
+    setMyMovies((prevMovies) => prevMovies.filter((_, i) => i !== index));
+  };
+  const toggleSelection = (index) => {
+    console.log(index);
+
+    setMyMovies(
+      myMovies.map((movies, i) => {
+        if (i === index) {
+          return { ...movies, selected: !movies.selected };
+        }
+        return movies;
+      })
+    );
+  };
 
   return (
     <div className="App">
       <ul>
         {myMovies.map((movies, index) => {
           return (
-            <li key={movies}>
+            <li key={index}>
               <input
                 type="checkbox"
-                onChange={() =>
-                  setIsTrue({ ...isTrue, [index]: !isTrue[index] })
-                }
+                checked={movies.selected}
+                onChange={() => toggleSelection(index)}
               />
-              {movies}
+              {movies.name}
 
-              {isTrue[index] && (
+              {movies.selected && (
                 <button onClick={(e) => deleteFun(index)}>Delete</button>
               )}
             </li>
