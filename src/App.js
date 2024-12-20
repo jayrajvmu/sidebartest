@@ -9,6 +9,8 @@ import Wrap from './Components/Wrap/Wrap';
 // import GeneratePDF from './Components/PDF/GeneratePDF';
 import DataTable from './Components/DataTable/DataTable';
 
+import Check from './Components/Check/Check';
+
 import {footeri, headeri} from "./assets/image"
 
 
@@ -78,6 +80,12 @@ function App() {
           <Route path="/" element={<>
             
           </>} />
+
+          <Route path="/check" element={<>
+
+          <Check/>
+            
+            </>} />
         </Routes>
         
       </Router>
